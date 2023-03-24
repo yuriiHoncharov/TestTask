@@ -1,0 +1,13 @@
+strings:
+    inputs:
+        TestTask/Resources/String/en.lproj
+    outputs:
+        templatePath: testTask.stencil
+        output: TestTask/Resources/Generated/Strings.swift
+xcassets:
+  inputs:
+    - TestTask/Resources/Assets.xcassets
+    - TestTask/Resources/Colors.xcassets
+  outputs:
+    - templateName: swift5
+      output: TestTask/Resources/Generated/Assets.swift
