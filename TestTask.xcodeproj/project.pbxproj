@@ -30,6 +30,9 @@
 		1F94D62629CD9458003BB8C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F94D62429CD9458003BB8C8 /* Localizable.strings */; };
 		1F94D62929CD9975003BB8C8 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F94D62829CD9975003BB8C8 /* Language.swift */; };
 		1F94D62D29CD99BD003BB8C8 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F94D62C29CD99BD003BB8C8 /* LanguageManager.swift */; };
+		1F94D63029CD9BDE003BB8C8 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F94D62F29CD9BDE003BB8C8 /* Extension+UIView.swift */; };
+		1F94D63229CD9C3C003BB8C8 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F94D63129CD9C3C003BB8C8 /* Extension+UIViewController.swift */; };
+		1F94D63429CD9D69003BB8C8 /* Assets+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F94D63329CD9D68003BB8C8 /* Assets+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +80,9 @@
 		1F94D62529CD9458003BB8C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		1F94D62829CD9975003BB8C8 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		1F94D62C29CD99BD003BB8C8 /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		1F94D62F29CD9BDE003BB8C8 /* Extension+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		1F94D63129CD9C3C003BB8C8 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
+		1F94D63329CD9D68003BB8C8 /* Assets+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assets+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,7 @@
 		1F94D5C129CD87F9003BB8C8 /* TestTask */ = {
 			isa = PBXGroup;
 			children = (
+				1F94D62E29CD9BB8003BB8C8 /* Extention */,
 				1F94D62A29CD99B0003BB8C8 /* Manager */,
 				1F94D62729CD9964003BB8C8 /* Enums */,
 				1F94D60D29CD8D16003BB8C8 /* Resources */,
@@ -206,12 +213,12 @@
 		1F94D60D29CD8D16003BB8C8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1F94D62229CD940D003BB8C8 /* String */,
-				1F94D61F29CD9065003BB8C8 /* Colors.xcassets */,
-				1F94D5CB29CD87FB003BB8C8 /* Assets.xcassets */,
-				1F94D5CD29CD87FB003BB8C8 /* LaunchScreen.storyboard */,
-				1F94D5D029CD87FB003BB8C8 /* Info.plist */,
 				1F94D60E29CD8F1D003BB8C8 /* Generated */,
+				1F94D62229CD940D003BB8C8 /* String */,
+				1F94D5CB29CD87FB003BB8C8 /* Assets.xcassets */,
+				1F94D61F29CD9065003BB8C8 /* Colors.xcassets */,
+				1F94D5D029CD87FB003BB8C8 /* Info.plist */,
+				1F94D5CD29CD87FB003BB8C8 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -263,6 +270,16 @@
 				1F94D62C29CD99BD003BB8C8 /* LanguageManager.swift */,
 			);
 			path = Language;
+			sourceTree = "<group>";
+		};
+		1F94D62E29CD9BB8003BB8C8 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				1F94D63329CD9D68003BB8C8 /* Assets+Extension.swift */,
+				1F94D62F29CD9BDE003BB8C8 /* Extension+UIView.swift */,
+				1F94D63129CD9C3C003BB8C8 /* Extension+UIViewController.swift */,
+			);
+			path = Extention;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,8 +418,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F94D63229CD9C3C003BB8C8 /* Extension+UIViewController.swift in Sources */,
 				1F94D5C729CD87F9003BB8C8 /* ViewController.swift in Sources */,
 				1F94D62D29CD99BD003BB8C8 /* LanguageManager.swift in Sources */,
+				1F94D63029CD9BDE003BB8C8 /* Extension+UIView.swift in Sources */,
+				1F94D63429CD9D69003BB8C8 /* Assets+Extension.swift in Sources */,
 				1F94D61629CD8F1E003BB8C8 /* Strings.swift in Sources */,
 				1F94D61729CD8F1E003BB8C8 /* Assets.swift in Sources */,
 				1F94D60829CD8B5C003BB8C8 /* MainTabBarInteractor.swift in Sources */,
