@@ -15,6 +15,8 @@ enum Language: String, CaseIterable, Codable {
         switch self {
         case .english:
             return "en"
+            // return "en-US"
+
         }
     }
     

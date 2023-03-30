@@ -22,13 +22,13 @@ internal enum L10n {
   internal static func home() -> String { 
     return L10n.tr("Localizable", "Home") 
   }
+  /// MOVIE to G
+  internal static func movieToG() -> String { 
+    return L10n.tr("Localizable", "MovieToG") 
+  }
   /// Release:
   internal static func release() -> String { 
     return L10n.tr("Localizable", "Release") 
-  }
-  /// MOVIE to G
-  internal static func wconnect() -> String { 
-    return L10n.tr("Localizable", "Wconnect") 
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

@@ -20,22 +20,22 @@ enum MainTabBarItems: Int, CaseIterable {
     
     var image: UIImage {
         switch self {
-        case .home: return UIImage(named: "Home") ?? .add
-        case .favourite: return UIImage(named: "Favourite") ?? .add
+        case .home: return UIImage(named: Images.home.name) ?? .add
+        case .favourite: return UIImage(named: Images.favorite.name) ?? .add
         }
     }
     
     var selectedImage: UIImage {
         switch self {
-        case .home: return UIImage(named: "HomeSelected") ?? .add
-        case .favourite: return UIImage(named: "FavouriteSelected") ?? .add
+        case .home: return UIImage(named: Images.homeSelected.name) ?? .add
+        case .favourite: return UIImage(named: Images.favoriteSelected.name) ?? .add
         }
     }
     
     var viewController: UIViewController {
         switch self {
-        case .home: return ViewController()
-        case .favourite: return ViewController()
+        case .home: return MovieListTableViewController.fromStoryboard
+        case .favourite: return MovieListTableViewController.fromStoryboard
         }
     }
 }

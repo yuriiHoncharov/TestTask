@@ -31,8 +31,8 @@ internal enum Asset {
     internal static let homeSelected = ImageAsset(name: "HomeSelected")
   }
   internal enum Colors {
-    internal static let accentOrange = ColorAsset(name: "AccentOrange")
     internal static let background = ColorAsset(name: "Background")
+    internal static let baseOrange = ColorAsset(name: "BaseOrange")
     internal static let black = ColorAsset(name: "Black")
     internal static let gray = ColorAsset(name: "Gray")
   }
