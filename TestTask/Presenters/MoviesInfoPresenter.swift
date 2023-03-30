@@ -28,6 +28,7 @@ class MoviesInfoPresenter: MoviesInfoPresenterProtocol {
             guard let self else { return }
             self.movieInfo = item
             self.view.display(entity: self.movieInfo)
+            self.view.reloadData()
         }
     }
     

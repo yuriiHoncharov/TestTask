@@ -9,17 +9,13 @@ import UIKit
 
 protocol MoviesInfoViewControllerProtocol {
     func display(entity: MovieInfoApiEntity.MovieInfo)
+    func reloadData()
 }
 
 class MoviesInfoViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var navigationLabel: UILabel!
-    @IBOutlet weak var movieImage: UIImageView!
-    @IBOutlet weak var movieNameLabel: UILabel!
-    @IBOutlet weak var movieRateLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var movieDescriptionLabel: UILabel!
-    @IBOutlet weak var movieReleaseLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     // MARK: - Properties
     var presenter: MoviesInfoPresenterProtocol!
     var getId = Int()
@@ -27,22 +23,18 @@ class MoviesInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = MoviesInfoPresenter(view: self)
-        navigationLabel.text = L10n.movieToG()
-        descriptionLabel.text = L10n.description()
-        movieImage.cornerRadius = 8
         presenter.getData(id: getId)
+        setupView()
     }
     
-    private func movieRateText(rate: String) {
-        let attachment = NSTextAttachment()
-        attachment.image = UIImage(named: Images.star.name)
-        attachment.bounds = CGRect(x: 0, y: -4, width: 16, height: 16)
-        let attachmentStr = NSAttributedString(attachment: attachment)
-        let myString = NSMutableAttributedString(string: "")
-        let myString1 = NSMutableAttributedString(string: " \(rate) ")
-        myString.append(myString1)
-        myString.append(attachmentStr)
-        movieRateLabel.attributedText = myString
+    func setupView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(MovieIconTableViewCell.self)
+        tableView.register(MovieDetailsTableViewCell.self)
+        
+        navigationLabel.text = L10n.movieToG()
+        tableView.separatorStyle = .none
     }
     
     @IBAction func backButton(_ sender: Any) {
@@ -52,10 +44,33 @@ class MoviesInfoViewController: UIViewController {
 
 extension MoviesInfoViewController: MoviesInfoViewControllerProtocol {
     func display(entity: MovieInfoApiEntity.MovieInfo) {
-        movieImage.image = UIImage(named: entity.posterPath)
-        movieNameLabel.text = entity.originalTitle
-        movieDescriptionLabel.text = entity.overview
-        movieReleaseLabel.text = entity.releaseDate
-        movieRateText(rate: String(format: "%.01f", entity.voteAverage))
     }
+    
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+}
+
+extension MoviesInfoViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == 0 {
+            // cell 1
+            let cell = tableView.dequeue(MovieIconTableViewCell.self, indexPath)
+            cell.display(entity: presenter.movieInfo)
+            return cell
+            // cell 2
+        } else {
+            let cell = tableView.dequeue(MovieDetailsTableViewCell.self, indexPath)
+            cell.display(entity: presenter.movieInfo)
+            return cell
+        }
+    }
+    
 }

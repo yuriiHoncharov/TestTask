@@ -118,7 +118,7 @@ final class HTTPClient: HTTPClientProvider {
                     break
                 default:
                     print(error.localizedDescription)
-//                    completion(.failure(error.localizedDescription as! Error))
+                    completion(.failure(error.localizedDescription as! Error))
                 }
             } else if let data = data, let response = response as? HTTPURLResponse {
                 switch response.statusCode {
@@ -140,32 +140,6 @@ final class HTTPClient: HTTPClientProvider {
     private func safelyAddRequest(oAuthRequest: RestRequest) {
         requestDispatchQueue.async(flags: .barrier) { [weak self] in
             self?.requests.append(oAuthRequest)
-        }
-    }
-    
-    private func safelySendAllRequests() {
-        requestDispatchQueue.async(flags: .barrier) { [weak self] in
-            guard let self = self else { return }
-            
-            let token = self.getAccessData()?.token ?? ""
-            
-            for restRequest in self.requests {
-                var request = restRequest.request
-                print(restRequest.request.url?.absoluteString as Any)
-                if token.isEmpty == false, (request.allHTTPHeaderFields?.keys.contains(self.tokenHeaderKey) ?? false) {
-                    request.setValue("Bearer \(token)", forHTTPHeaderField: self.tokenHeaderKey)
-                }
-                
-                self.performRequest(request, completion: restRequest.completion)
-            }
-            
-            self.requests.removeAll()
-        }
-    }
-    
-    private func safelyRemoveAllRequests() {
-        requestDispatchQueue.async(flags: .barrier) { [weak self] in
-            self?.requests.removeAll()
         }
     }
     
@@ -324,7 +298,7 @@ extension Encodable {
     }
 }
 
-extension Dictionary {
+extension Dictionary { 
     fileprivate func queryItems() -> String {
         guard let dict = self as? [String: Any] else { return "" }
         

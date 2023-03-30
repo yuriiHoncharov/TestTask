@@ -20,11 +20,8 @@ class MovieListPresenter: MovieListPresenterProtocol {
     private let movieApi = MovieRequest()
     var movieUpcoming: [UpcomingApiEntity.Item] = []
     
-    var page: Int = 0
-//    var isNeedReload: Bool = false
-//    var isNextPageExist: Bool = true
-//    var shouldDoRequest: Bool = true
-    
+    private var page: Int = 0
+
     required init(view: MovieListTableViewControllerProtocol) {
         self.view = view
     }
@@ -38,9 +35,7 @@ class MovieListPresenter: MovieListPresenterProtocol {
     }
     
     private func getUpcomingMovies(completionHandler: ((_ item: [UpcomingApiEntity.Item]) -> Void)?) {
-//        if isNeedReload { return }
         page += 1
-//        isNeedReload = true
         let params = UpcomingApiEntity.Request(apiKey: Constants.apiKey,
                                                language: "en-US",
                                                page: page,
@@ -60,7 +55,6 @@ class MovieListPresenter: MovieListPresenterProtocol {
                     } else {
                         upcomingMovies.append(contentsOf: model.results)
                         self.movieUpcoming.append(contentsOf: upcomingMovies)
-//                        self.isNeedReload = false
                     }
                 case .failure(let error):
                     print(error.localizedDescription)

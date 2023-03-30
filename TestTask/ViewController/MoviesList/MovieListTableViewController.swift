@@ -18,6 +18,8 @@ class MovieListTableViewController: UIViewController {
     // MARK: - Properties
     var presenter: MovieListPresenterProtocol!
     var movies: [UpcomingApiEntity.Item] = []
+    let x: Array<Int> = []
+    let some:[Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +61,7 @@ extension MovieListTableViewController: UITableViewDelegate, UITableViewDataSour
         print(presenter.movieUpcoming[indexPath.row].id)
         cell.display(entity: presenter.movieUpcoming[indexPath.row])
         cell.backgroundColor = UIColor(named: Colors.background.name)
-        cell.infoLabel.text = String(indexPath.row)
+        // cell.infoLabel.text = String(indexPath.row)
         if presenter.movieUpcoming.count - 1 == indexPath.row {
             presenter.getData()
         }
@@ -73,18 +75,3 @@ extension MovieListTableViewController: UITableViewDelegate, UITableViewDataSour
         
     }
 }
-
-//extension MovieListTableViewController: UIScrollViewDelegate {
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let position = scrollView.contentOffset.y
-//        if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
-//            //            DispatchQueue.main.async {
-//            //                self.presenter.page += 1
-//            //                print("AAAA")
-//            //                print(self.presenter.page)
-//            //                self.reloadData()
-//            //        }
-//            presenter.getNextPage()
-//        }
-//    }
-//}
