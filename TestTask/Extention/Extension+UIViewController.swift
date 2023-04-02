@@ -25,19 +25,4 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-    func makeTransparentNavigationBar(titleColor: UIColor = .white) {        
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.view.backgroundColor = .clear
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
-        setupBackButtonIfNeeded()
-    }
-    
-    func setupBackButtonIfNeeded(color: UIColor = .white) {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = color
-    }
 }

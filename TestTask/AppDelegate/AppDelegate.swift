@@ -13,9 +13,8 @@ var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let mainStoryboard = UIStoryboard(name: "MainTabBarController", bundle: nil)
         
-        let rootViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainTabBarController")
+        let rootViewController = MainTabBarController.fromStoryboard
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.isNavigationBarHidden = true
         

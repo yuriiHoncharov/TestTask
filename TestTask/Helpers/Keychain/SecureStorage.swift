@@ -10,7 +10,6 @@ import Foundation
 
 struct SecureStorageKeys {
     static let kAccessData = "kAccessData"
-    static let kEnvironment = "kEnvironment"
 }
 
 class SecureStorage {

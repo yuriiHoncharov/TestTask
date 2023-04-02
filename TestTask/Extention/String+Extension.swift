@@ -21,11 +21,3 @@ extension Optional where Wrapped: OptionalString {
         return val.isEmpty ? nil : val
     }
 }
-
-extension String {
-    func widthOfString(usingFont font: UIFont) -> CGFloat {
-        let fontAttributes = [NSAttributedString.Key.font: font]
-        let size = self.size(withAttributes: fontAttributes)
-        return size.width
-    }
-}

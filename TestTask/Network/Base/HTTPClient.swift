@@ -51,7 +51,6 @@ final class HTTPClient: HTTPClientProvider {
     private let deviceIdHeaderKey = "deviceId"
     private let platformHeaderKey = "platform"
     private let uuid: String? = UIDevice.current.identifierForVendor?.uuidString
-    //    private var isRefreshTokenRequestInProgress = false
     
     private let delegateQueue: OperationQueue
     private let urlSession: URLSession
