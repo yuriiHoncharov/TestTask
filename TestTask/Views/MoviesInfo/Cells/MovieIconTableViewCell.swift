@@ -8,7 +8,6 @@
 import UIKit
 
 class MovieIconTableViewCell: UITableViewCell {
-    
     @IBOutlet private weak var posterImage: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var rateLabel: UILabel!
@@ -18,7 +17,6 @@ class MovieIconTableViewCell: UITableViewCell {
     }
     
     func display(entity: MovieInfoApiEntity.MovieInfo) {
-        
         posterImage.load(string: entity.posterPath)
         nameLabel.text = entity.originalTitle
         movieRateText(rate: String(format: "%.01f", entity.voteAverage))
@@ -35,5 +33,4 @@ class MovieIconTableViewCell: UITableViewCell {
         myString.append(attachmentStr)
         rateLabel.attributedText = myString
     }
-//https://image.tmdb.org/t/p/w500
 }

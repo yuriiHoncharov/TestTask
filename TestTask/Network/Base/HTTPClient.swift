@@ -24,7 +24,6 @@ protocol HTTPClientProvider {
 final class HTTPClient: HTTPClientProvider {
     static let shared = HTTPClient()
     
-    
     init() {
         self.delegateQueue = OperationQueue()
         self.delegateQueue.qualityOfService = .userInteractive

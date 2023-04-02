@@ -18,7 +18,7 @@ class MoviesInfoPresenter: MoviesInfoPresenterProtocol {
     private var view: MoviesInfoViewControllerProtocol
     private let movieApi = MovieRequest()
     var movieInfo: MovieInfoApiEntity.MovieInfo = .mock
-
+    
     required init(view: MoviesInfoViewControllerProtocol) {
         self.view = view
     }
@@ -35,7 +35,6 @@ class MoviesInfoPresenter: MoviesInfoPresenterProtocol {
     private func getMovieInfoById(id: Int, completionHandler: ((_ item: MovieInfoApiEntity.MovieInfo) -> Void)?) {
         let params = MovieInfoApiEntity.Request(language: Language.english.rawValue)
         movieApi.getMovieById(id: id, params: params) { response in
-            
             DispatchQueue.main.async {
                 var newMovieInfo: MovieInfoApiEntity.MovieInfo = .mock
                 switch response {
@@ -48,7 +47,7 @@ class MoviesInfoPresenter: MoviesInfoPresenterProtocol {
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-                    completionHandler?(newMovieInfo)
+                completionHandler?(newMovieInfo)
             }
         }
     }

@@ -8,7 +8,6 @@
 import UIKit
 
 class MovieDetailsTableViewCell: UITableViewCell {
-    
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var movieDescriptionLabel: UILabel!
     @IBOutlet private weak var releaseLabel: UILabel!
@@ -22,5 +21,4 @@ class MovieDetailsTableViewCell: UITableViewCell {
         movieDescriptionLabel.text = entity.overview
         releaseLabel.text = entity.releaseDate
     }
-    
 }

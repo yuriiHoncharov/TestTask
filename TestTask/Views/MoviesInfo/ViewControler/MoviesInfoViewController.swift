@@ -41,7 +41,6 @@ class MoviesInfoViewController: UIViewController {
         tableView.separatorStyle = .none
     }
     
-    
     @IBAction private func backButton(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -64,7 +63,6 @@ extension MoviesInfoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.row == 0 {
             // cell 1
             let cell = tableView.dequeue(MovieIconTableViewCell.self, indexPath)
@@ -77,5 +75,4 @@ extension MoviesInfoViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         }
     }
-    
 }

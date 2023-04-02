@@ -42,7 +42,6 @@ class MovieListTableViewController: UIViewController {
 }
 
 extension MovieListTableViewController: MovieListTableViewControllerProtocol {
-    
     func reloadData() {
         DispatchQueue.main.async {
             self.tableView.reloadTable(isAnimate: true)
@@ -54,7 +53,6 @@ extension MovieListTableViewController: MovieListTableViewControllerProtocol {
 extension MovieListTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.movieUpcoming.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,6 +71,5 @@ extension MovieListTableViewController: UITableViewDelegate, UITableViewDataSour
         let vc = MoviesInfoViewController.fromStoryboard
         vc.getId = presenter.movieUpcoming[indexPath.row].id
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
 }
