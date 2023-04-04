@@ -14,5 +14,6 @@ struct APIEndpoints {
     struct Movie {
         static func upcoming() -> String { return "\(baseURL())/movie/upcoming" }
         static func movieId() -> String { return "\(baseURL())/movie/%@" }
+        static func topRated() -> String { return "\(baseURL())/movie/top_rated" } 
     }
 }

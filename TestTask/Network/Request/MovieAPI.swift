@@ -16,6 +16,14 @@ class MovieRequest: APIService {
         }
     }
     
+    func getAllTopMovies(params: TopRateApiEntity.Request, completion: @escaping (Result<TopRateApiEntity.MovieRate, Error>) -> Void) {
+        let url = APIEndpoints.Movie.topRated()
+        httpClient.request(method: .get, url: url, withToken: false, images: nil, params: params) { [weak self] response in
+            guard let self = self else { return }
+            self.handleResponseResult(result: response, responseModel: TopRateApiEntity.MovieRate.self, completion: completion)
+        }
+    }
+    
     func getMovieById(id: Int, params: MovieInfoApiEntity.Request, completion: @escaping (Result<MovieInfoApiEntity.MovieInfo, Error>) -> Void) {
         let url = String(format: APIEndpoints.Movie.movieId(), String(id))
         

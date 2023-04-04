@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol BaseResponseProtocol: Codable {
+protocol BaseResponseProtocol: Decodable {
     var error: String? { get set }
 }
 
