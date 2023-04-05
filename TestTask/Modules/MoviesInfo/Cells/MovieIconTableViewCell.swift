@@ -12,6 +12,9 @@ class MovieIconTableViewCell: UITableViewCell {
     @IBOutlet private weak var posterImage: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var rateLabel: UILabel!
+    @IBOutlet private weak var playImage: UIImageView!
+    
+    private var isShowVideo: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,11 +22,21 @@ class MovieIconTableViewCell: UITableViewCell {
     }
     
     private func setupCell() {
+        if isShowVideo {
+            self.playImage.image = UIImage(named: Images.playButton.name)
+        }
+        // label
         self.nameLabel.font = UIFont(name: Constants.FontRaleway.bold, size: 16)
         self.rateLabel.font = UIFont(name: Constants.FontRaleway.semiBold, size: 12)
+        // image
+        self.posterImage.frame = self.bounds
+        self.posterImage.clipsToBounds = true
+        self.posterImage.contentMode = .scaleAspectFill
+        self.posterImage.addGradientLayerInBackground(frame: posterImage.frame, colors: [.clear, Colors.linearGradient.color])
     }
     
     func display(entity: MovieInfoApiEntity.MovieInfo) {
+        isShowVideo = entity.video
         moviesImage(string: entity.backdropPath)
         nameLabel.text = entity.originalTitle
         movieRateText(rate: String(format: "%.01f", entity.voteAverage))

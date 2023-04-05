@@ -15,9 +15,11 @@ class MovieListTableViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView!
     // MARK: - Properties
-    var presenter: MovieListPresenterProtocol!
-    var movies: [MovieEntity] = []
+    private var presenter: MovieListPresenterProtocol!
+    private var movies: [MovieEntity] = []
     private let dataSource = MovieListDataSource()
+    
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,7 @@ class MovieListTableViewController: UIViewController {
         setupTable()
         setupDataSource()
         loadModeData()
+        refreshTable()
     }
     
     private func setupTable() {
@@ -59,6 +62,16 @@ class MovieListTableViewController: UIViewController {
         tableView.tableFooterView = footer
     }
     
+    private func refreshTable() {
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        presenter.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
     private func loadModeData() {
         dataSource.loadMoreItem = {
             self.presenter.getData()
@@ -70,7 +83,7 @@ extension MovieListTableViewController: MovieListTableViewControllerProtocol {
     func reloadData(with rows: [MovieEntity]) {
         DispatchQueue.main.async {
             self.dataSource.updateData(rows: rows)
-            self.movies.append(contentsOf: rows)
+            self.movies = rows
             self.tableView.reloadTable(isAnimate: true)
         }
     }

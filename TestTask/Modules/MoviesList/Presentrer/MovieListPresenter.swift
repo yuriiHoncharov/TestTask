@@ -9,6 +9,7 @@ import Foundation
 
 protocol MovieListPresenterProtocol {
     func getData()
+    func reloadData()
 }
 
 class MovieListPresenter: MovieListPresenterProtocol {
@@ -24,6 +25,12 @@ class MovieListPresenter: MovieListPresenterProtocol {
         self.view = view
     }
     
+    func reloadData() {
+        page = 0
+        movieUpcoming = []
+        getData()
+    }
+    
     func getData() {
         guard !isLoading else { return }
         
@@ -34,7 +41,7 @@ class MovieListPresenter: MovieListPresenterProtocol {
             
             self.isLoading = false
             self.movieUpcoming.append(contentsOf: items)
-            self.view.reloadData(with: items)
+            self.view.reloadData(with: self.movieUpcoming)
         }
     }
     
@@ -51,10 +58,10 @@ class MovieListPresenter: MovieListPresenterProtocol {
                         print(error)
                     } else {
                         let items = model.results ?? []
-                        items.forEach { item in
-                            let movies = MovieEntityMapper.mapUpcoming(item, dateUtility: DateFormatterUtility())
-                            upcomingMovies.append(movies)
+                        let movies = items.map {
+                            MovieEntityMapper.mapUpcoming($0, dateUtility: DateFormatterUtility())
                         }
+                        upcomingMovies = movies
                     }
                 case .failure(let error):
                     print(error.localizedDescription)

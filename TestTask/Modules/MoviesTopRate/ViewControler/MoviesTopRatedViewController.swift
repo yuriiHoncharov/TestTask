@@ -8,14 +8,16 @@
 import UIKit
 
 protocol MoviesTopRatedViewControllerProtocol: AnyObject {
-    func reloadData()
+    func reloadData(with rows: [MovieEntity])
 }
 
 class MoviesTopRatedViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView!
     // MARK: - Properties
-    var presenter: MoviesTopRatedPresenterProtocol!
+    private var presenter: MoviesTopRatedPresenterProtocol!
+    private var movies: [MovieEntity] = []
+    private let dataSource = MovieTopRateDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +30,34 @@ class MoviesTopRatedViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = UIColor(named: Colors.background.name)
         setupTable()
+        setupDataSource()
+        loadModeData()
     }
     
     private func setupTable() {
-        tableView.dataSource = self
-        tableView.delegate = self
+        tableView.dataSource = dataSource
+        tableView.delegate = dataSource
         tableView.backgroundColor = UIColor(named: Colors.background.name)
         tableView.separatorStyle = .none
         tableView.register(MovieListTableViewCell.self)
         
         setupTableViewFooter()
+    }
+    
+    private func setupDataSource() {
+        self.dataSource.didSelectRowAt = { [weak self] indexPath in
+            guard let self else { return }
+            let vc = MoviesInfoViewController.fromStoryboard
+            vc.getId = self.movies[indexPath.row].id
+            print(self.movies[indexPath.row].id)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    private func loadModeData() {
+        dataSource.loadMoreItem = {
+            self.presenter.getData()
+        }
     }
     
     private func setupTableViewFooter() {
@@ -47,32 +67,11 @@ class MoviesTopRatedViewController: UIViewController {
     }
 }
 
-extension MoviesTopRatedViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.movieTopRate.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(MovieListTableViewCell.self, indexPath)
-        cell.displayForTop(entity: presenter.movieTopRate[indexPath.row])
-        
-        cell.backgroundColor = UIColor(named: Colors.background.name)
-        if presenter.movieTopRate.count - 1 == indexPath.row {
-            presenter.getData()
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = MoviesInfoViewController.fromStoryboard
-        vc.getId = presenter.movieTopRate[indexPath.row].id
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
 extension MoviesTopRatedViewController: MoviesTopRatedViewControllerProtocol {
-    func reloadData() {
+    func reloadData(with rows: [MovieEntity]) {
         DispatchQueue.main.async {
+            self.dataSource.updateData(rows: rows)
+            self.movies.append(contentsOf: rows)
             self.tableView.reloadTable(isAnimate: true)
         }
     }

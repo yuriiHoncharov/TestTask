@@ -27,6 +27,7 @@ internal enum Asset {
     internal static let star = ImageAsset(name: "Star")
     internal static let backButton = ImageAsset(name: "backButton")
     internal static let logo = ImageAsset(name: "Logo")
+    internal static let playButton = ImageAsset(name: "PlayButton")
     internal static let favorite = ImageAsset(name: "Favorite")
     internal static let favoriteSelected = ImageAsset(name: "FavoriteSelected")
     internal static let home = ImageAsset(name: "Home")
@@ -37,6 +38,7 @@ internal enum Asset {
     internal static let baseOrange = ColorAsset(name: "BaseOrange")
     internal static let black = ColorAsset(name: "Black")
     internal static let gray = ColorAsset(name: "Gray")
+    internal static let linearGradient = ColorAsset(name: "LinearGradient")
     internal static let white = ColorAsset(name: "White")
   }
 }

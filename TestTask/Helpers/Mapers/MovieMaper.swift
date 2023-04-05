@@ -23,7 +23,7 @@ struct MovieEntityMapper {
     static func mapUpcoming(_ entity: UpcomingApiEntity.Item, dateUtility: DateFormatterUtility) -> MovieEntity {
         let correctDate = dateUtility.refactoringDate(from: entity.releaseDate)
         return MovieEntity(id: entity.id,
-                           adult: entity.adult ?? false,
+                           adult: entity.adult,
                            backdropPath: entity.backdropPath,
                            overview: entity.overview,
                            popularity: entity.popularity,
@@ -36,7 +36,7 @@ struct MovieEntityMapper {
     static func mapTop(_ entity: TopRateApiEntity.Item, dateUtility: DateFormatterUtility) -> MovieEntity {
         let correctDate = dateUtility.refactoringDate(from: entity.releaseDate)
         return MovieEntity(id: entity.id,
-                           adult: entity.adult ?? false,
+                           adult: entity.adult,
                            backdropPath: entity.backdropPath,
                            overview: entity.overview,
                            popularity: entity.popularity,

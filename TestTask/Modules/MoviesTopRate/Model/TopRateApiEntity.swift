@@ -22,9 +22,9 @@ enum TopRateApiEntity {
     
     struct MovieRate: BaseResponseProtocol {
         var error: String?
-        let page: Int
-        let results: [Item]
-        let totalPages, totalResults: Int
+        let page: Int?
+        let results: [Item]?
+        let totalPages, totalResults: Int?
         
         enum CodingKeys: String, CodingKey {
             case page, results

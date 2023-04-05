@@ -12,6 +12,8 @@ class MovieDetailsTableViewCell: UITableViewCell {
     @IBOutlet private weak var movieDescriptionLabel: UILabel!
     @IBOutlet private weak var releaseLabel: UILabel!
     
+    let dateUtility: DateFormatterUtility = DateFormatterUtility()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCell()
@@ -25,7 +27,8 @@ class MovieDetailsTableViewCell: UITableViewCell {
     }
     
     func display(entity: MovieInfoApiEntity.MovieInfo) {
+        let correctDate = dateUtility.refactoringDate(from: entity.releaseDate)
         movieDescriptionLabel.text = entity.overview
-        releaseLabel.text = entity.releaseDate
+        releaseLabel.text = correctDate
     }
 }

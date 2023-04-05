@@ -44,6 +44,7 @@
 		1F5B085D29DC3877006FE92D /* Raleway-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F5B084B29DC3877006FE92D /* Raleway-Italic.ttf */; };
 		1F5B085E29DC3877006FE92D /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F5B084C29DC3877006FE92D /* Raleway-Bold.ttf */; };
 		1F5B086A29DD57DD006FE92D /* MovieMaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B086929DD57DD006FE92D /* MovieMaper.swift */; };
+		1F5B086D29DD7017006FE92D /* MovieTopRateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B086C29DD7017006FE92D /* MovieTopRateDataSource.swift */; };
 		1F5C5D0229D44B370014FD97 /* MovieInfoExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C5D0129D44B370014FD97 /* MovieInfoExtention.swift */; };
 		1F94D5C329CD87F9003BB8C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F94D5C229CD87F9003BB8C8 /* AppDelegate.swift */; };
 		1F94D5CC29CD87FB003BB8C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F94D5CB29CD87FB003BB8C8 /* Assets.xcassets */; };
@@ -147,6 +148,7 @@
 		1F5B084B29DC3877006FE92D /* Raleway-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Italic.ttf"; sourceTree = "<group>"; };
 		1F5B084C29DC3877006FE92D /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
 		1F5B086929DD57DD006FE92D /* MovieMaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMaper.swift; sourceTree = "<group>"; };
+		1F5B086C29DD7017006FE92D /* MovieTopRateDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTopRateDataSource.swift; sourceTree = "<group>"; };
 		1F5C5D0129D44B370014FD97 /* MovieInfoExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoExtention.swift; sourceTree = "<group>"; };
 		1F94D5BF29CD87F9003BB8C8 /* TestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F94D5C229CD87F9003BB8C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 		1F5B081F29DC04FF006FE92D /* MoviesTopRate */ = {
 			isa = PBXGroup;
 			children = (
+				1F5B086B29DD6F4B006FE92D /* DataSource */,
 				1F5B082929DC0844006FE92D /* Model */,
 				1F5B082629DC080B006FE92D /* Presenter */,
 				1F5B082429DC05ED006FE92D /* Storyboard */,
@@ -475,6 +478,14 @@
 				1F5B086929DD57DD006FE92D /* MovieMaper.swift */,
 			);
 			path = Mapers;
+			sourceTree = "<group>";
+		};
+		1F5B086B29DD6F4B006FE92D /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				1F5B086C29DD7017006FE92D /* MovieTopRateDataSource.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		1F5C5D0029D44B1A0014FD97 /* Model */ = {
@@ -1051,6 +1062,7 @@
 				1F94D60729CD8B5C003BB8C8 /* MainTabBarController.swift in Sources */,
 				1F5B083829DC2BBD006FE92D /* DateFormatterUtility.swift in Sources */,
 				1FBB9BDC29CDB84C005ED585 /* Extension+UITableView.swift in Sources */,
+				1F5B086D29DD7017006FE92D /* MovieTopRateDataSource.swift in Sources */,
 				1F94D60929CD8B5C003BB8C8 /* MainTabBarRouter.swift in Sources */,
 				1FBB9BDD29CDB84C005ED585 /* Extension+UICollectionView.swift in Sources */,
 				1F94D62929CD9975003BB8C8 /* Language.swift in Sources */,
