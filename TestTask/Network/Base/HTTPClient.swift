@@ -116,7 +116,7 @@ final class HTTPClient: HTTPClientProvider {
                     break
                 default:
                     print(error.localizedDescription)
-                    completion(.failure(error.localizedDescription as! Error))
+                    completion(.failure(NSError(domain: error.localizedDescription, code: errorType.code)))
                 }
             } else if let data = data, let response = response as? HTTPURLResponse {
                 switch response.statusCode {

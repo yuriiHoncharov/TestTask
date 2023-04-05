@@ -12,12 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UIFont.familyNames.forEach { name in
-//            let fonts = UIFont.fontNames(forFamilyName: name)
-            for fontName in UIFont.fontNames(forFamilyName: name) {
-                print("\n\(fontName)")
-            }
-        }
         
         let rootViewController = MainTabBarController.fromStoryboard
         let navigationController = UINavigationController(rootViewController: rootViewController)

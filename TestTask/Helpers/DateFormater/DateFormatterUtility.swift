@@ -9,7 +9,7 @@ import Foundation
 
 struct DateFormatterUtility {
     private let isoDateFormatter = ISO8601DateFormatter()
-//    private var now: Date { Date() }
+    private var now: Date { Date() }
     
     func date(from serverString: String) -> Date {
         let dateFormatter = DateFormatter()
@@ -21,5 +21,10 @@ struct DateFormatterUtility {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter.string(from: date)
+    }
+    
+    func refactoringDate(from string: String) -> String {
+        let date = isoDateFormatter.date(from: string) ?? now
+        return dayMonthYear(from: date)
     }
 }

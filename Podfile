@@ -7,6 +7,7 @@ target 'TestTask' do
 
   # Pods for TestTask
   pod 'SwiftLint'
+  pod 'Kingfisher'
   target 'TestTaskTests' do
     inherit! :search_paths
     # Pods for testing
