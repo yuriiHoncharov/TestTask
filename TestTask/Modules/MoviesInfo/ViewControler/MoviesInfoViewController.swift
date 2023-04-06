@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MoviesInfoViewControllerProtocol: AnyObject {
+protocol MoviesInfoViewControllerProtocol: AnyObject, UIViewController {
     func display(entity: MovieInfoApiEntity.MovieInfo)
     func reloadData()
 }
@@ -29,6 +29,7 @@ class MoviesInfoViewController: UIViewController {
    private func setupView() {
        view.backgroundColor = UIColor(named: Colors.background.name)
        setupTable()
+       rightButton()
     }
     
     private func setupTable() {
@@ -38,6 +39,19 @@ class MoviesInfoViewController: UIViewController {
         tableView.register(MovieDetailsTableViewCell.self)
         tableView.backgroundColor = UIColor(named: Colors.background.name)
         tableView.separatorStyle = .none
+    }
+    
+    private func rightButton() {
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+
+        rightSwipe.direction = .right
+        view.addGestureRecognizer(rightSwipe)
+    }
+    
+    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .right {
+            presenter.rightButton()
+        }
     }
     
     @IBAction private func backButton(_ sender: Any) {
