@@ -23,7 +23,6 @@ class MovieListDataSource: NSObject, UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = rows[indexPath.row]
         let cell: UITableViewCell & MovieListTableViewCellProtocol = tableView.dequeue(MovieListTableViewCell.self, indexPath)
-//        cell.backgroundColor = UIColor(named: Colors.background.name)
         
         cell.display(entity: item)
         

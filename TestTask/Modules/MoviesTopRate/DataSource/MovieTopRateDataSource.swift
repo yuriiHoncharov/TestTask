@@ -13,7 +13,7 @@ class MovieTopRateDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     var loadMoreItem: (() -> Void)?
 
     func updateData(rows: [MovieEntity]) {
-        self.rows += rows
+        self.rows = rows
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

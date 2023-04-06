@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MovieListTableViewControllerProtocol: AnyObject {
+protocol MovieListTableViewControllerProtocol: AnyObject, UIViewController {
     func reloadData(with rows: [MovieEntity])
 }
 
@@ -16,9 +16,7 @@ class MovieListTableViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     // MARK: - Properties
     private var presenter: MovieListPresenterProtocol!
-    private var movies: [MovieEntity] = []
     private let dataSource = MovieListDataSource()
-    
     private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -31,9 +29,8 @@ class MovieListTableViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = UIColor(named: Colors.background.name)
         setupTable()
-        setupDataSource()
-        loadModeData()
         refreshTable()
+        setupDataSource()
     }
     
     private func setupTable() {
@@ -49,11 +46,9 @@ class MovieListTableViewController: UIViewController {
     private func setupDataSource() {
         self.dataSource.didSelectRowAt = { [weak self] indexPath in
             guard let self else { return }
-            let vc = MoviesInfoViewController.fromStoryboard
-            vc.getId = self.movies[indexPath.row].id
-            print(self.movies[indexPath.row].id)
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.presenter.moveToMovieInfo(indexPath)
         }
+        dataSource.loadMoreItem = { self.presenter.getData() }
     }
     
     private func setupTableViewFooter() {
@@ -71,19 +66,12 @@ class MovieListTableViewController: UIViewController {
         presenter.reloadData()
         refreshControl.endRefreshing()
     }
-    
-    private func loadModeData() {
-        dataSource.loadMoreItem = {
-            self.presenter.getData()
-        }
-    }
 }
 
 extension MovieListTableViewController: MovieListTableViewControllerProtocol {
     func reloadData(with rows: [MovieEntity]) {
         DispatchQueue.main.async {
             self.dataSource.updateData(rows: rows)
-            self.movies = rows
             self.tableView.reloadTable(isAnimate: true)
         }
     }

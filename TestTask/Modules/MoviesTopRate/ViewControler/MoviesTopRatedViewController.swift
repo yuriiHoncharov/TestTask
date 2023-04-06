@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MoviesTopRatedViewControllerProtocol: AnyObject {
+protocol MoviesTopRatedViewControllerProtocol: AnyObject, UIViewController {
     func reloadData(with rows: [MovieEntity])
 }
 
@@ -18,10 +18,10 @@ class MoviesTopRatedViewController: UIViewController {
     private var presenter: MoviesTopRatedPresenterProtocol!
     private var movies: [MovieEntity] = []
     private let dataSource = MovieTopRateDataSource()
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         presenter = MoviesTopRatedPresenter(view: self)
         setupView()
         presenter.getData()
@@ -31,7 +31,7 @@ class MoviesTopRatedViewController: UIViewController {
         view.backgroundColor = UIColor(named: Colors.background.name)
         setupTable()
         setupDataSource()
-        loadModeData()
+        refreshTable()
     }
     
     private func setupTable() {
@@ -47,11 +47,10 @@ class MoviesTopRatedViewController: UIViewController {
     private func setupDataSource() {
         self.dataSource.didSelectRowAt = { [weak self] indexPath in
             guard let self else { return }
-            let vc = MoviesInfoViewController.fromStoryboard
-            vc.getId = self.movies[indexPath.row].id
-            print(self.movies[indexPath.row].id)
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.presenter.moveToMovieInfo(indexPath)
         }
+        dataSource.loadMoreItem = { self.presenter.getData() }
+        loadModeData()
     }
     
     private func loadModeData() {
@@ -65,13 +64,23 @@ class MoviesTopRatedViewController: UIViewController {
         footer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50)
         tableView.tableFooterView = footer
     }
+    
+    private func refreshTable() {
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        presenter.reloadData()
+        refreshControl.endRefreshing()
+    }
 }
 
 extension MoviesTopRatedViewController: MoviesTopRatedViewControllerProtocol {
     func reloadData(with rows: [MovieEntity]) {
         DispatchQueue.main.async {
             self.dataSource.updateData(rows: rows)
-            self.movies.append(contentsOf: rows)
+            self.movies = rows
             self.tableView.reloadTable(isAnimate: true)
         }
     }
