@@ -24,8 +24,8 @@ class MoviesInfoPresenter: MoviesInfoPresenterProtocol {
         self.view = view
     }
     
-     func rightButton() {
-         self.view.navigationController?.popViewController(animated: true)
+    func rightButton() {
+        self.view.navigationController?.popViewController(animated: true)
     }
     
     func getData(id: Int) {

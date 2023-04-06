@@ -26,10 +26,10 @@ class MoviesInfoViewController: UIViewController {
         setupView()
     }
     
-   private func setupView() {
-       view.backgroundColor = UIColor(named: Colors.background.name)
-       setupTable()
-       rightButton()
+    private func setupView() {
+        view.backgroundColor = UIColor(named: Colors.background.name)
+        setupTable()
+        rightButton()
     }
     
     private func setupTable() {
@@ -43,7 +43,6 @@ class MoviesInfoViewController: UIViewController {
     
     private func rightButton() {
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-
         rightSwipe.direction = .right
         view.addGestureRecognizer(rightSwipe)
     }
@@ -70,7 +69,6 @@ extension MoviesInfoViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeue(MovieIconTableViewCell.self, indexPath)
             cell.display(entity: presenter.movieInfo)
             cell.backgroundColor = UIColor(named: Colors.background.name)
-
             return cell
             // cell 2
         } else {
