@@ -27,10 +27,8 @@ class MoviesTopRatedPresenter: MoviesTopRatedPresenterProtocol {
     }
     
     func moveToMovieInfo(_ indexPath: IndexPath) {
-        let vc = MoviesInfoViewController.fromStoryboard
-        vc.getId = self.movieTopRate[indexPath.row].id
-        print(self.movieTopRate[indexPath.row].id)
-        view.moveToMovieInfo(controller: vc)
+        let id = self.movieTopRate[indexPath.row].id
+        view.moveToMovieInfo(id: id)
     }
     
     func reloadData() {

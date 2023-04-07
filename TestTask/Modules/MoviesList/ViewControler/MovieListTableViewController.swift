@@ -9,7 +9,7 @@ import UIKit
 
 protocol MovieListTableViewControllerProtocol: AnyObject {
     func reloadData(with rows: [MovieEntity])
-    func moveToMovieInfo(controller: UIViewController)
+    func moveToMovieInfo(id: Int)
 }
 
 class MovieListTableViewController: UIViewController {
@@ -77,7 +77,9 @@ extension MovieListTableViewController: MovieListTableViewControllerProtocol {
         }
     }
     
-    func moveToMovieInfo(controller: UIViewController) {
-        navigationController?.pushViewController(controller, animated: true)
+    func moveToMovieInfo(id: Int) {
+        let vc = MoviesInfoViewController.fromStoryboard
+        vc.setupPresenter(id: id)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

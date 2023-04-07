@@ -8,9 +8,9 @@
 import Foundation
 
 protocol MoviesInfoPresenterProtocol: AnyObject {
-    init(view: MoviesInfoViewControllerProtocol)
+    init(view: MoviesInfoViewControllerProtocol, id: Int)
     var movieInfo: MovieInfoEntity? { get set }
-    func getData(id: Int)
+    func getData()
 }
 
 class MoviesInfoPresenter: MoviesInfoPresenterProtocol {
@@ -18,12 +18,14 @@ class MoviesInfoPresenter: MoviesInfoPresenterProtocol {
     private unowned var view: MoviesInfoViewControllerProtocol!
     private let movieApi = MovieRequest()
     var movieInfo: MovieInfoEntity?
+    let id: Int
     
-    required init(view: MoviesInfoViewControllerProtocol) {
+    required init(view: MoviesInfoViewControllerProtocol, id: Int) {
         self.view = view
+        self.id = id
     }
     
-    func getData(id: Int) {
+    func getData() {
         getMovieInfoById(id: id) { [weak self] item in
             guard let self else { return }
             self.movieInfo = item
@@ -44,8 +46,6 @@ class MoviesInfoPresenter: MoviesInfoPresenterProtocol {
                     } else {
                         let movies = MovieInfoEntityMapper.map(model, dateUtility: DateFormatterUtility())
                         newMovieInfo = movies
-                        
-                        //                        newMovieInfo = model
                     }
                 case .failure(let error):
                     print(error.localizedDescription)

@@ -10,6 +10,7 @@ import UIKit
 protocol MoviesInfoViewControllerProtocol: AnyObject {
     func display(entity: MovieInfoEntity)
     func reloadData()
+    func setupPresenter(id: Int)
 }
 
 class MoviesInfoViewController: UIViewController {
@@ -17,13 +18,15 @@ class MoviesInfoViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     // MARK: - Properties
     var presenter: MoviesInfoPresenterProtocol!
-    var getId = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = MoviesInfoPresenter(view: self)
-        presenter.getData(id: getId)
+        presenter.getData()
         setupView()
+    }
+    
+    func setupPresenter(id: Int) {
+        presenter = MoviesInfoPresenter(view: self, id: id)
     }
     
     private func setupView() {

@@ -28,10 +28,8 @@ class MovieListPresenter: MovieListPresenterProtocol {
     }
     
     func moveToMovieInfo(_ indexPath: IndexPath) {
-        let vc = MoviesInfoViewController.fromStoryboard
-        vc.getId = self.movieUpcoming[indexPath.row].id
-        print(self.movieUpcoming[indexPath.row].id)
-        view.moveToMovieInfo(controller: vc)
+        let id = self.movieUpcoming[indexPath.row].id
+        view.moveToMovieInfo(id: id)
     }
     
     func reloadData() {
