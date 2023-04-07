@@ -17,11 +17,11 @@ class MovieIconTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        cleanDate()
+        resetContent()
         setupCell()
     }
     
-    private func cleanDate() {
+    private func resetContent() {
         posterImage.image = nil
         nameLabel.text = ""
         rateLabel.text = ""
@@ -40,18 +40,6 @@ class MovieIconTableViewCell: UITableViewCell {
         posterImage.setImage(from: entity.backdropPath)
         posterImage.addGradientLayerInBackground(frame: self.bounds, colors: [.clear, Colors.linearGradient.color])
         nameLabel.text = entity.title
-        movieRateText(rate: String(format: "%.01f", entity.popularity))
-    }
-    
-    private func movieRateText(rate: String) {
-        let attachment = NSTextAttachment()
-        attachment.image = UIImage(named: Images.star.name)
-        attachment.bounds = CGRect(x: 0, y: -4, width: 16, height: 16)
-        let attachmentStr = NSAttributedString(attachment: attachment)
-        let myString = NSMutableAttributedString(string: "")
-        let myString1 = NSMutableAttributedString(string: " \(rate) ")
-        myString.append(myString1)
-        myString.append(attachmentStr)
-        rateLabel.attributedText = myString
+        rateLabel.text = String(format: "%.01f", entity.popularity)
     }
 }

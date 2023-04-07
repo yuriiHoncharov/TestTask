@@ -14,7 +14,14 @@ class MovieDetailsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        resetContent()
         setupCell()
+    }
+    
+    private func resetContent() {
+        descriptionLabel.text = ""
+        movieDescriptionLabel.text = ""
+        releaseLabel.text = ""
     }
     
     private func setupCell() {

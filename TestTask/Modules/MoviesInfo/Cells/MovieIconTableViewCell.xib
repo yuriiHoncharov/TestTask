@@ -29,12 +29,13 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4U-up-WMN">
-                        <rect key="frame" x="234.66666666666666" y="166.33333333333334" width="32.333333333333343" height="14.333333333333343"/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
-                        <color key="textColor" name="White"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star" translatesAutoresizingMaskIntoConstraints="NO" id="5Gg-hF-Gzm">
+                        <rect key="frame" x="251" y="165.33333333333334" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="c5w-cR-LEr"/>
+                            <constraint firstAttribute="width" constant="16" id="iEO-EF-d7c"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJh-At-J6f">
                         <rect key="frame" x="28.000000000000004" y="163.66666666666666" width="42.333333333333343" height="19.333333333333343"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
@@ -48,20 +49,28 @@
                             <constraint firstAttribute="width" constant="65" id="kPr-oU-c56"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4U-up-WMN">
+                        <rect key="frame" x="214.66666666666666" y="166.33333333333334" width="32.333333333333343" height="14.333333333333343"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                        <color key="textColor" name="White"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="A4U-up-WMN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vJh-At-J6f" secondAttribute="trailing" constant="16" id="1T4-db-7Tn"/>
                     <constraint firstItem="vJh-At-J6f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="BpE-E5-RyY"/>
                     <constraint firstItem="0yS-jk-iKH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="DGb-fz-zfF"/>
+                    <constraint firstItem="vJh-At-J6f" firstAttribute="centerY" secondItem="5Gg-hF-Gzm" secondAttribute="centerY" id="HYV-5x-XuZ"/>
                     <constraint firstAttribute="bottom" secondItem="0yS-jk-iKH" secondAttribute="bottom" id="SSs-4g-5Z1"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="A4U-up-WMN" secondAttribute="trailing" constant="12" id="U40-07-mcx"/>
                     <constraint firstAttribute="trailing" secondItem="0yS-jk-iKH" secondAttribute="trailing" constant="16" id="U4m-IU-itI"/>
                     <constraint firstItem="MDT-g4-ZIz" firstAttribute="centerX" secondItem="0yS-jk-iKH" secondAttribute="centerX" id="WJt-1m-ZFe"/>
+                    <constraint firstItem="A4U-up-WMN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vJh-At-J6f" secondAttribute="trailing" constant="16" id="ade-fq-AId"/>
                     <constraint firstItem="0yS-jk-iKH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="c4r-Oq-rZr"/>
+                    <constraint firstItem="5Gg-hF-Gzm" firstAttribute="leading" secondItem="A4U-up-WMN" secondAttribute="trailing" constant="4" id="eDQ-2c-rxj"/>
                     <constraint firstItem="MDT-g4-ZIz" firstAttribute="centerY" secondItem="0yS-jk-iKH" secondAttribute="centerY" id="hF1-fC-hxZ"/>
-                    <constraint firstItem="vJh-At-J6f" firstAttribute="centerY" secondItem="A4U-up-WMN" secondAttribute="centerY" id="lAP-87-GAa"/>
+                    <constraint firstItem="vJh-At-J6f" firstAttribute="centerY" secondItem="A4U-up-WMN" secondAttribute="centerY" id="jJi-q0-36O"/>
                     <constraint firstItem="0yS-jk-iKH" firstAttribute="baseline" secondItem="vJh-At-J6f" secondAttribute="firstBaseline" constant="16" id="yRN-Hu-ZTx"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="5Gg-hF-Gzm" secondAttribute="trailing" constant="12" id="z7h-H2-tde"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -76,6 +85,7 @@
     </objects>
     <resources>
         <image name="PlayButton" width="64" height="64"/>
+        <image name="Star" width="15" height="14"/>
         <namedColor name="Background">
             <color red="0.96078431372549022" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
