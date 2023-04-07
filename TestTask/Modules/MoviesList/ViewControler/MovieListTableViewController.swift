@@ -7,8 +7,9 @@
 
 import UIKit
 
-protocol MovieListTableViewControllerProtocol: AnyObject, UIViewController {
+protocol MovieListTableViewControllerProtocol: AnyObject {
     func reloadData(with rows: [MovieEntity])
+    func moveToMovieInfo(controller: UIViewController)
 }
 
 class MovieListTableViewController: UIViewController {
@@ -74,5 +75,9 @@ extension MovieListTableViewController: MovieListTableViewControllerProtocol {
             self.dataSource.updateData(rows: rows)
             self.tableView.reloadTable(isAnimate: true)
         }
+    }
+    
+    func moveToMovieInfo(controller: UIViewController) {
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

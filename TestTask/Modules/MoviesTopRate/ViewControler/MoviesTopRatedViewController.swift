@@ -7,8 +7,9 @@
 
 import UIKit
 
-protocol MoviesTopRatedViewControllerProtocol: AnyObject, UIViewController {
+protocol MoviesTopRatedViewControllerProtocol: AnyObject {
     func reloadData(with rows: [MovieEntity])
+    func moveToMovieInfo(controller: UIViewController)
 }
 
 class MoviesTopRatedViewController: UIViewController {
@@ -84,5 +85,9 @@ extension MoviesTopRatedViewController: MoviesTopRatedViewControllerProtocol {
             self.movies = rows
             self.tableView.reloadTable(isAnimate: true)
         }
+    }
+    
+    func moveToMovieInfo(controller: UIViewController) {
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

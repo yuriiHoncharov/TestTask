@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MoviesInfoViewControllerProtocol: AnyObject, UIViewController {
+protocol MoviesInfoViewControllerProtocol: AnyObject {
     func display(entity: MovieInfoEntity)
     func reloadData()
 }
@@ -49,7 +49,7 @@ class MoviesInfoViewController: UIViewController {
     
     @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .right {
-            presenter.rightButton()
+            navigationController?.popViewController(animated: true)
         }
     }
     

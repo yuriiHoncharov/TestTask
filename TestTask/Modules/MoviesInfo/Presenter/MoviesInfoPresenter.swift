@@ -11,7 +11,6 @@ protocol MoviesInfoPresenterProtocol: AnyObject {
     init(view: MoviesInfoViewControllerProtocol)
     var movieInfo: MovieInfoEntity? { get set }
     func getData(id: Int)
-    func rightButton()
 }
 
 class MoviesInfoPresenter: MoviesInfoPresenterProtocol {
@@ -22,10 +21,6 @@ class MoviesInfoPresenter: MoviesInfoPresenterProtocol {
     
     required init(view: MoviesInfoViewControllerProtocol) {
         self.view = view
-    }
-    
-    func rightButton() {
-        self.view.navigationController?.popViewController(animated: true)
     }
     
     func getData(id: Int) {

@@ -31,7 +31,7 @@ class MovieListPresenter: MovieListPresenterProtocol {
         let vc = MoviesInfoViewController.fromStoryboard
         vc.getId = self.movieUpcoming[indexPath.row].id
         print(self.movieUpcoming[indexPath.row].id)
-        self.view.navigationController?.pushViewController(vc, animated: true)
+        view.moveToMovieInfo(controller: vc)
     }
     
     func reloadData() {
