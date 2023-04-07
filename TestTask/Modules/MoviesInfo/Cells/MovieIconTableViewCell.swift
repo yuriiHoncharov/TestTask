@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class MovieIconTableViewCell: UITableViewCell {
     @IBOutlet private weak var posterImage: UIImageView!
@@ -18,33 +17,30 @@ class MovieIconTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        cleanDate()
         setupCell()
     }
     
+    private func cleanDate() {
+        posterImage.image = nil
+        nameLabel.text = ""
+        rateLabel.text = ""
+        playImage.image = nil
+    }
+    
     private func setupCell() {
-        if isShowVideo {
-            self.playImage.image = UIImage(named: Images.playButton.name)
-        }
         // label
         self.nameLabel.font = UIFont(name: Constants.FontRaleway.bold, size: 16)
         self.rateLabel.font = UIFont(name: Constants.FontRaleway.semiBold, size: 12)
-        // image
-        self.posterImage.frame = self.bounds
-        self.posterImage.clipsToBounds = true
-        self.posterImage.contentMode = .scaleAspectFill
-        self.posterImage.addGradientLayerInBackground(frame: posterImage.frame, colors: [.clear, Colors.linearGradient.color])
     }
     
-    func display(entity: MovieInfoApiEntity.MovieInfo) {
+    func display(entity: MovieInfoEntity) {
+        playImage.isHidden = !entity.video
         isShowVideo = entity.video
-        moviesImage(string: entity.backdropPath)
-        nameLabel.text = entity.originalTitle
-        movieRateText(rate: String(format: "%.01f", entity.voteAverage))
-    }
-    
-    private func moviesImage(string: String) {
-        let url = URL(string: Constants.imageUrl + ImageSize.original.rawValue + string)
-        self.posterImage.kf.setImage(with: url)
+        posterImage.setImage(from: entity.backdropPath)
+        posterImage.addGradientLayerInBackground(frame: self.bounds, colors: [.clear, Colors.linearGradient.color])
+        nameLabel.text = entity.title
+        movieRateText(rate: String(format: "%.01f", entity.popularity))
     }
     
     private func movieRateText(rate: String) {

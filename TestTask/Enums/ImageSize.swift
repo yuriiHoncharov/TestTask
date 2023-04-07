@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ImageSize: String, CaseIterable {
+enum ImageSize: String {
     case original
     case w300
     case w500

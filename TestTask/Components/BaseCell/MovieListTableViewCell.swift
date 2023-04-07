@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 protocol MovieListTableViewCellProtocol {
     func display(entity: MovieEntity)
@@ -21,7 +20,6 @@ class MovieListTableViewCell: UITableViewCell {
     @IBOutlet private weak var dateLabel: UILabel!
     
     var buttonAction: (() -> Void)?
-    let dateFormatter = DateFormatterUtility()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,18 +32,13 @@ class MovieListTableViewCell: UITableViewCell {
         self.infoLabel.font = UIFont(name: Constants.FontRaleway.regular, size: 12)
         self.dateLabel.font = UIFont(name: Constants.FontRaleway.semiBold, size: 12)
     }
-    
-    private func moviesImage(string: String) {
-        let url = URL(string: Constants.imageUrl + ImageSize.original.rawValue + string)
-        self.moviesImage.kf.setImage(with: url)
-    }
 }
 
 extension MovieListTableViewCell: MovieListTableViewCellProtocol {
     func display(entity: MovieEntity) {
-        self.moviesImage(string: entity.posterPath ?? "")
+        moviesImage.setImage(from: entity.posterPath ?? "")
         self.nameLabel.text = entity.title
         self.infoLabel.text = entity.overview
-        self.dateLabel.text = String("\(L10n.release()) \(entity.releaseDate)")
+        self.dateLabel.text = String("\(L10n.release) \(entity.releaseDate)")
     }
 }

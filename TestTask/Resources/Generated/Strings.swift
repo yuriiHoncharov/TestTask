@@ -11,25 +11,13 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   /// Description:
-  internal static func description() -> String { 
-    return L10n.tr("Localizable", "Description") 
-  }
+  internal static let description = L10n.tr("Localizable", "Description")
   /// Favourite
-  internal static func favourite() -> String { 
-    return L10n.tr("Localizable", "Favourite") 
-  }
+  internal static let favourite = L10n.tr("Localizable", "Favourite")
   /// Home
-  internal static func home() -> String { 
-    return L10n.tr("Localizable", "Home") 
-  }
-  /// MOVIE to G
-  internal static func movieToG() -> String { 
-    return L10n.tr("Localizable", "MovieToG") 
-  }
+  internal static let home = L10n.tr("Localizable", "Home")
   /// Release:
-  internal static func release() -> String { 
-    return L10n.tr("Localizable", "Release") 
-  }
+  internal static let release = L10n.tr("Localizable", "Release")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
@@ -38,22 +26,8 @@ internal enum L10n {
 
 extension L10n {
   private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
-    let localeID = getLocalizationLanguage().localeIdentifier
-    if let path = BundleToken.bundle.path(forResource: localeID, ofType: "lproj"), let bundle = Bundle(path: path) {
-        let localizedStr = NSLocalizedString(key, tableName: table, bundle: bundle, value: "", comment: "")
-        return String(format: localizedStr, args)
-    }
-    return NSLocalizedString(key, tableName: table, bundle: BundleToken.bundle, value: "", comment: "")
-  }
-
-  private static func getLocalizationLanguage() -> Language {
-    if let language = LanguageManager.shared.getCurrentLanguage() {
-        return language
-    } else {
-        let language = Language(languageCode: Locale.current.languageCode)
-        LanguageManager.shared.setLanguage(language)
-        return language
-    }
+    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
+    return String(format: format, locale: Locale.current, arguments: args)
   }
 }
 

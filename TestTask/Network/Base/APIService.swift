@@ -45,9 +45,9 @@ class APIService {
                     completion(.success(response))
                     
                 case .failure(let error):
-                    print(error)
                     let errorMessage = error.localizedDescription
-                     completion(.failure(errorMessage as! Error))
+                    print(errorMessage)
+                    completion(.failure(error as NSError))
                 }
             }
             

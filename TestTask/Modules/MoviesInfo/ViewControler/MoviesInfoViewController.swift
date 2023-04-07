@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MoviesInfoViewControllerProtocol: AnyObject, UIViewController {
-    func display(entity: MovieInfoApiEntity.MovieInfo)
+    func display(entity: MovieInfoEntity)
     func reloadData()
 }
 
@@ -67,21 +67,25 @@ extension MoviesInfoViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             // cell 1
             let cell = tableView.dequeue(MovieIconTableViewCell.self, indexPath)
-            cell.display(entity: presenter.movieInfo)
-            cell.backgroundColor = UIColor(named: Colors.background.name)
+            if let movieInfo = presenter.movieInfo {
+                cell.display(entity: movieInfo)
+                cell.backgroundColor = UIColor(named: Colors.background.name)
+            }
             return cell
             // cell 2
         } else {
             let cell = tableView.dequeue(MovieDetailsTableViewCell.self, indexPath)
-            cell.backgroundColor = UIColor(named: Colors.background.name)
-            cell.display(entity: presenter.movieInfo)
+            if let movieInfo = presenter.movieInfo {
+                cell.backgroundColor = UIColor(named: Colors.background.name)
+                cell.display(entity: movieInfo)
+            }
             return cell
         }
     }
 }
 
 extension MoviesInfoViewController: MoviesInfoViewControllerProtocol {
-    func display(entity: MovieInfoApiEntity.MovieInfo) {
+    func display(entity: MovieInfoEntity) {
     }
     
     func reloadData() {

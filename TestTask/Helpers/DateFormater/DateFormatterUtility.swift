@@ -25,9 +25,8 @@ struct DateFormatterUtility {
     
     func refactoringDate(from string: String) -> String {
         isoDateFormatter.formatOptions = [.withFullDate, .withDashSeparatorInDate]
-
+        
         let date = isoDateFormatter.date(from: string)
-
         let dateFormatterOutput = DateFormatter()
         dateFormatterOutput.dateFormat = "dd.MM.yyyy"
         let output = dateFormatterOutput.string(from: date ?? now)

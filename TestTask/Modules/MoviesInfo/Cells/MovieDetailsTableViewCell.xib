@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ChE-Uc-Ysa">
-                        <rect key="frame" x="16.000000000000004" y="0.0" width="41.333333333333343" height="85.333333333333329"/>
+                        <rect key="frame" x="16.000000000000004" y="23.999999999999993" width="41.333333333333343" height="85.333333333333314"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Np6-6I-CSx">
                                 <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="19.333333333333332"/>
@@ -49,7 +49,7 @@
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ChE-Uc-Ysa" secondAttribute="bottom" constant="16" id="7aa-R5-NtM"/>
                     <constraint firstItem="ChE-Uc-Ysa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="MUC-Sy-NxA"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ChE-Uc-Ysa" secondAttribute="trailing" constant="16" id="QcJ-gC-kQ8"/>
-                    <constraint firstItem="ChE-Uc-Ysa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="l3k-nK-OGg"/>
+                    <constraint firstItem="ChE-Uc-Ysa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="l3k-nK-OGg"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

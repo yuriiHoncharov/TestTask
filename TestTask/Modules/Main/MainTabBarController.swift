@@ -10,27 +10,10 @@ protocol MainTabBarControllerProtocol: AnyObject {
 }
 
 class MainTabBarController: UITabBarController {
-    // MARK: - IBOutlets
-    
-    // MARK: - Properties
-    static let builder = MainTabBarBuilder()
-    private var interactor: MainTabBarInteractorProtocol!
-    private var router: MainTabBarRouterProtocol!
-    
-    // MARK: - Setup
-    func initialSetup(interactor: MainTabBarInteractorProtocol, router: MainTabBarRouterProtocol) {
-        self.interactor = interactor
-        self.router = router
-    }
-    
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBarController()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupTabBarController() {
@@ -46,7 +29,11 @@ class MainTabBarController: UITabBarController {
                                       selectedImage: item.selectedImage)
         tabBarItem.tag = item.rawValue
         vc.tabBarItem = tabBarItem
-        return vc
+        
+        let navigationController = UINavigationController(rootViewController: vc)
+        navigationController.isNavigationBarHidden = true
+        
+        return navigationController
     }
     
     private func setupTabBar() {

@@ -2,7 +2,7 @@ strings:
     inputs:
         TestTask/Resources/String/en.lproj
     outputs:
-        templatePath: testTask.stencil
+        templateName: structured-swift5
         output: TestTask/Resources/Generated/Strings.swift
 xcassets:
   inputs:

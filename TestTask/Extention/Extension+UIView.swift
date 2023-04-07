@@ -40,11 +40,11 @@ extension UIView {
                                         owner: nil,
                                         options: nil)![0] as! T
     }
-
-   func addGradientLayerInBackground(frame: CGRect, colors: [UIColor]) {
-    let gradient = CAGradientLayer()
-    gradient.frame = frame
-    gradient.colors = colors.map { $0.cgColor }
-    self.layer.insertSublayer(gradient, at: 0)
-   }
+    
+    func addGradientLayerInBackground(frame: CGRect, colors: [UIColor]) {
+        let gradient = CAGradientLayer()
+        gradient.frame = frame
+        gradient.colors = colors.map { $0.cgColor }
+        self.layer.insertSublayer(gradient, at: 0)
+    }
 }

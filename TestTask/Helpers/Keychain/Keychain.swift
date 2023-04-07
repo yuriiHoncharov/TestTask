@@ -34,11 +34,11 @@ class Keychain: Keychainable {
             let resultsDict = result as? NSDictionary,
             let resultsData = resultsDict.value(forKey: kSecValueData as String) as? Data,
             status == noErr
-            else {
-                print("Load status: ", status)
-                return nil
+        else {
+            print("Load status: ", status)
+            return nil
         }
-
+        
         return try? JSONDecoder().decode(T.self, from: resultsData)
     }
     
@@ -65,7 +65,7 @@ class Keychain: Keychainable {
     private func save<T: Codable>(_ value: T?, forKey key: String) {
         let query = keychainQuery(with: key)
         let objectData = try? JSONEncoder().encode(value)
-
+        
         if SecItemCopyMatching(query, nil) == noErr {
             if let dictData = objectData {
                 let status = SecItemUpdate(query, NSDictionary(dictionary: [kSecValueData: dictData]))

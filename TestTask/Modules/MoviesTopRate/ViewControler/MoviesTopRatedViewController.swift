@@ -60,6 +60,7 @@ class MoviesTopRatedViewController: UIViewController {
     }
     
     private func setupTableViewFooter() {
+        // TODO: stop footer when load last item.
         let footer: LoadingFooterView = .fromNib()
         footer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50)
         tableView.tableFooterView = footer

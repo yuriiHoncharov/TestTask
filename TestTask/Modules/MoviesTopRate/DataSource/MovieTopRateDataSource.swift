@@ -11,7 +11,7 @@ class MovieTopRateDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     private var rows: [MovieEntity] = []
     var didSelectRowAt: ((_ indexPath: IndexPath) -> Void)?
     var loadMoreItem: (() -> Void)?
-
+    
     func updateData(rows: [MovieEntity]) {
         self.rows = rows
     }
@@ -23,7 +23,7 @@ class MovieTopRateDataSource: NSObject, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = rows[indexPath.row]
         let cell: UITableViewCell & MovieListTableViewCellProtocol = tableView.dequeue(MovieListTableViewCell.self, indexPath)
-      
+        
         cell.display(entity: item)
         
         if rows.count - 1 == indexPath.row {

@@ -13,8 +13,8 @@ enum MainTabBarItems: Int, CaseIterable {
     
     var title: String {
         switch self {
-        case .home: return L10n.home()
-        case .favourite: return L10n.favourite()
+        case .home: return L10n.home
+        case .favourite: return L10n.favourite
         }
     }
     
