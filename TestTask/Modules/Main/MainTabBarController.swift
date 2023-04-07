@@ -39,7 +39,7 @@ class MainTabBarController: UITabBarController {
     private func setupTabBar() {
         self.tabBar.roundCorners([.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 24)
         
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: Colors.gray.name ) ?? .gray], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: Colors.grayForButton.name ) ?? .gray], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: Colors.baseOrange.name) ?? .green], for: .selected)
     }
 }
