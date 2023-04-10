@@ -39,6 +39,6 @@ extension MovieListTableViewCell: MovieListTableViewCellProtocol {
         moviesImage.setImage(from: entity.posterPath ?? "")
         self.nameLabel.text = entity.title
         self.infoLabel.text = entity.overview
-        self.dateLabel.text = String("\(L10n.release) \(entity.releaseDate)")
+        self.dateLabel.text = entity.releaseDate
     }
 }

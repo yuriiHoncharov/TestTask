@@ -546,10 +546,10 @@
 		1F94D5F929CD8B5C003BB8C8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				1F9DEE6E29E3E615006E1CB3 /* Controller */,
 				1F94D5FB29CD8B5C003BB8C8 /* Enum */,
-				1F94D60329CD8B5C003BB8C8 /* MainTabBarController.storyboard */,
-				1F94D5FE29CD8B5C003BB8C8 /* MainTabBarController.swift */,
-				1F94D5FA29CD8B5C003BB8C8 /* MainTabBarPresenter.swift */,
+				1F9DEE6D29E3E606006E1CB3 /* Presenter */,
+				1F9DEE6F29E3E637006E1CB3 /* Storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -628,6 +628,30 @@
 				1F94D5C229CD87F9003BB8C8 /* AppDelegate.swift */,
 			);
 			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		1F9DEE6D29E3E606006E1CB3 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1F94D5FA29CD8B5C003BB8C8 /* MainTabBarPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1F9DEE6E29E3E615006E1CB3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F94D5FE29CD8B5C003BB8C8 /* MainTabBarController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1F9DEE6F29E3E637006E1CB3 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				1F94D60329CD8B5C003BB8C8 /* MainTabBarController.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		1FA4ED3E29E04EAC0011A087 /* MovieAPI */ = {

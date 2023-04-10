@@ -33,6 +33,6 @@ class MovieDetailsTableViewCell: UITableViewCell {
     
     func display(entity: MovieInfoEntity) {
         movieDescriptionLabel.text = entity.overview
-        releaseLabel.text = String("\(L10n.release) \(entity.releaseDate)")
+        releaseLabel.text = entity.releaseDate
     }
 }

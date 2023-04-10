@@ -25,12 +25,6 @@ extension UIView {
         layer.mask = mask
     }
     
-    func roundCorners(_ corners: CACornerMask, radius: CGFloat) {
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = radius
-        self.layer.maskedCorners = corners
-    }
-    
     class var identifier: String {
         return String(describing: self)
     }

@@ -11,7 +11,7 @@ class MovieListDataSource: NSObject, UITableViewDelegate, UITableViewDataSource 
     private var rows: [MovieEntity] = []
     var didSelectRowAt: ((_ indexPath: IndexPath) -> Void)?
     var loadMoreItem: (() -> Void)?
-
+    
     func updateData(rows: [MovieEntity]) {
         self.rows = rows
     }

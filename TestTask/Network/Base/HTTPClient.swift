@@ -296,7 +296,7 @@ extension Encodable {
     }
 }
 
-extension Dictionary { 
+extension Dictionary {
     fileprivate func queryItems() -> String {
         guard let dict = self as? [String: Any] else { return "" }
         
