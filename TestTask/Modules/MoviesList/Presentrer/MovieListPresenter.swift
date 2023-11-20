@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol MovieListPresenterProtocol {
-    func getData()
+    func getData() async
     func reloadData()
     func moveToMovieInfo(_ indexPath: IndexPath)
 }
@@ -35,39 +35,37 @@ class MovieListPresenter: MovieListPresenterProtocol {
     func reloadData() {
         page = 0
         movieUpcoming = []
-        getData()
+        Task {
+            await getData()
+        }
     }
     
-    func getData() {
+    func getData() async {
         guard !isLoading else { return }
         
         page += 1
         isLoading = true
         let params = UpcomingApiEntity.Request(page: page)
         
-        movieApi.getAllUpcomingMovies(params: params) { [weak self] response in
-            guard let self else { return }
+        do {
+            let upcomingMovie = try await movieApi.getAllUpcomingMovies(params: params)
             
-            DispatchQueue.main.async {
-                var upcomingMovies: [MovieEntity] = []
-                switch response {
-                case .success(let model):
-                    if let error = model.error {
-                        print(error)
-                    } else {
-                        let items = model.results ?? []
-                        let movies = items.map {
-                            MovieEntityMapper.mapUpcoming($0, dateUtility: DateFormatterUtility())
-                        }
-                        upcomingMovies = movies
-                        self.movieUpcoming.append(contentsOf: upcomingMovies)
-                        self.view.reloadData(with: self.movieUpcoming)
-                        self.isLoading = false
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
+            var upcomingMovies: [MovieEntity] = []
+            
+            if let error = upcomingMovie.error {
+                print(error)
+            } else {
+                let items = upcomingMovie.results ?? []
+                let movies = items.map {
+                    MovieEntityMapper.mapUpcoming($0, dateUtility: DateFormatterUtility())
                 }
+                upcomingMovies = movies
+                self.movieUpcoming.append(contentsOf: upcomingMovies)
+                self.view.reloadData(with: self.movieUpcoming)
+                self.isLoading = false
             }
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

@@ -21,10 +21,16 @@ class MoviesInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.getData()
         setupView()
+        getData()
     }
-    
+
+    private func getData() {
+        Task {
+            await presenter.getData()
+        }
+    }
+
     func setupPresenter(id: Int) {
         presenter = MoviesInfoPresenter(view: self, id: id)
     }
