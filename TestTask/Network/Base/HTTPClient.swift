@@ -17,9 +17,14 @@ struct ImageModel: Codable {
     }
 }
 
-protocol HTTPClientProvider {
-    func request(method: HTTPClient.RequestType, url: String, withToken: Bool, images: [ImageModel]?, params: Any?, completion: @escaping (Result<Data, Error>) -> Void)
+enum RequestError: Error {
+    case invalidURL
+    case networkError(Error)
+    case invalidResponse
 }
+
+protocol HTTPClientProvider {
+    func request(method: HTTPClient.RequestType, url: String, withToken: Bool, images: [ImageModel]?, params: Any?) async throws -> Data}
 
 final class HTTPClient: HTTPClientProvider {
     static let shared = HTTPClient()
@@ -38,7 +43,6 @@ final class HTTPClient: HTTPClientProvider {
     
     struct RestRequest {
         var request: URLRequest
-        var completion: HTTPClient.DataTaskCompletion
     }
     
     let jsonParser: JSONParserServiceProtocol = JSONParserService()
@@ -62,11 +66,11 @@ final class HTTPClient: HTTPClientProvider {
         case delete = "DELETE"
         case patch = "PATCH"
     }
-    
-    func request(method: HTTPClient.RequestType, url: String, withToken: Bool, images: [ImageModel]?, params: Any?, completion: @escaping DataTaskCompletion) {
+
+    func request(method: HTTPClient.RequestType, url: String, withToken: Bool, images: [ImageModel]?, params: Any?) async throws -> Data {
         var parameters: [String: Any] = [:]
         var arrayParams: [[String: Any]] = []
-        
+
         switch params {
         case let data as [String: Any]:
             parameters = data
@@ -94,48 +98,40 @@ final class HTTPClient: HTTPClientProvider {
                 urlRequest = createRequest(url: url, type: method, token: token, images: images, params: parameters)
             }
         }
-        
-        performRequest(urlRequest, skipRefreshCheck: !withToken, completion: completion)
+
+        return try await performRequest(urlRequest, skipRefreshCheck: !withToken)
     }
-    
-    private func performRequest(_ urlRequest: URLRequest?, skipRefreshCheck: Bool = false, completion: @escaping DataTaskCompletion) {
+
+    private func performRequest(_ urlRequest: URLRequest?, skipRefreshCheck: Bool = false) async throws -> Data {
         print("url: \(String(describing: urlRequest?.url?.absoluteString))")
-        
+
         guard let request = urlRequest else {
-            return completion(.failure("Errors empty URL" as! Error))
+            throw RequestError.invalidURL
         }
-        
-        let oAuthRequest = RestRequest(request: request, completion: completion)
-        
-        let dataTask = urlSession.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                let errorType = error as NSError
-                
-                switch errorType.code {
-                case NSURLErrorCancelled:
-                    break
-                default:
-                    print(error.localizedDescription)
-                    completion(.failure(NSError(domain: error.localizedDescription, code: errorType.code)))
-                }
-            } else if let data = data, let response = response as? HTTPURLResponse {
-                switch response.statusCode {
+
+        let oAuthRequest = RestRequest(request: request)
+
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            if let httpResponse = response as? HTTPURLResponse {
+                switch httpResponse.statusCode {
                 case 200...299:
-                    completion(.success(data))
+                    return data
                 case 401:
-                    self.safelyAddRequest(oAuthRequest: oAuthRequest)
+                    try await safelyAddRequest(oAuthRequest: oAuthRequest)
+                    return try await performRequest(urlRequest, skipRefreshCheck: true)
                 default:
-                    completion(.success(data))
+                    return data
                 }
             } else {
-                completion(.failure("Server error" as! Error))
+                throw RequestError.invalidResponse
             }
+        } catch {
+            throw RequestError.networkError(error)
         }
-        
-        dataTask.resume()
     }
-    
-    private func safelyAddRequest(oAuthRequest: RestRequest) {
+
+    private func safelyAddRequest(oAuthRequest: RestRequest) async throws {
         requestDispatchQueue.async(flags: .barrier) { [weak self] in
             self?.requests.append(oAuthRequest)
         }
@@ -243,10 +239,10 @@ final class HTTPClient: HTTPClientProvider {
         
         return fieldString
     }
-    
+
     private func convertFileData(fieldName: String, fileName: String, mimeType: String, fileData: Data, using boundary: String) -> Data {
         var data = Data()
-        
+
         data.append("--\(boundary)\r\n")
         data.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
         data.append("Content-Type: \(mimeType)\r\n\r\n")

@@ -24,7 +24,13 @@ class MovieListTableViewController: UIViewController {
         super.viewDidLoad()
         presenter = MovieListPresenter(view: self)
         setupViews()
-        presenter.getData()
+        getData()
+    }
+    
+    private func getData() {
+        Task {
+            await presenter.getData()
+        }
     }
     
     private func setupViews() {
@@ -49,7 +55,13 @@ class MovieListTableViewController: UIViewController {
             guard let self else { return }
             self.presenter.moveToMovieInfo(indexPath)
         }
-        dataSource.loadMoreItem = { self.presenter.getData() }
+        
+        dataSource.loadMoreItem = { [weak self] in
+            guard let self = self else { return }
+            Task {
+                await self.presenter.getData()
+            }
+        }
     }
     
     private func setupTableViewFooter() {

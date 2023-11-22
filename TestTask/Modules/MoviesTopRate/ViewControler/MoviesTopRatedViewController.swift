@@ -25,9 +25,15 @@ class MoviesTopRatedViewController: UIViewController {
         super.viewDidLoad()
         presenter = MoviesTopRatedPresenter(view: self)
         setupView()
-        presenter.getData()
+        getData()
     }
-    
+
+    private func getData() {
+        Task {
+            await presenter.getData()
+        }
+    }
+
     private func setupView() {
         view.backgroundColor = UIColor(named: Colors.background.name)
         setupTable()
@@ -50,13 +56,15 @@ class MoviesTopRatedViewController: UIViewController {
             guard let self else { return }
             self.presenter.moveToMovieInfo(indexPath)
         }
-        dataSource.loadMoreItem = { self.presenter.getData() }
         loadModeData()
     }
     
     private func loadModeData() {
-        dataSource.loadMoreItem = {
-            self.presenter.getData()
+        dataSource.loadMoreItem = { [weak self] in
+            guard let self = self else { return }
+            Task {
+                await self.presenter.getData()
+            }
         }
     }
     
@@ -72,8 +80,8 @@ class MoviesTopRatedViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
-    @objc func refresh(_ sender: AnyObject) {
-        presenter.reloadData()
+    @objc func refresh(_ sender: AnyObject) async {
+        await presenter.reloadData()
         refreshControl.endRefreshing()
     }
 }
